@@ -23,10 +23,10 @@ jobs:
           <?xml version="1.0" encoding="utf-8"?>
           <feed xmlns="http://www.w3.org/2005/Atom">
             <title>Otomoto Car Listings Feed</title>
-            <link href="https://<username>.github.io/<repo>/feed.atom" rel="self"/>
+            <link href="https://yutsuku.github.io/otomoto-feed/feed.atom" rel="self"/>
             <link href="https://www.otomoto.pl"/>
             <updated>$(date -u +"%Y-%m-%dT%H:%M:%SZ")</updated>
-            <id>https://<username>.github.io/<repo>/</id>
+            <id>https://yutsuku.github.io/otomoto-feed/</id>
           EOF
           # Extract entries from JSON and append to feed with thumbnail, mileage, and year
           jq -r '.data.advertSearch.edges[].node | "<entry><title>\(.title // "Untitled")</title><link href=\"\(.url)\"/><id>\(.id)</id><updated>\(.createdAt // "2025-04-10T00:00:00Z")</updated><summary><![CDATA[Price: \(.price.amount.value // "N/A") \(.price.amount.currencyCode // "") - \(.shortDescription // "No description") - Location: \(.location.city.name // "Unknown"), \(.location.region.name // "Unknown") - Mileage: \(.parameters[] | select(.key == "mileage") | .displayValue // "N/A") - Year: \(.parameters[] | select(.key == "year") | .displayValue // "N/A")<br><img src=\"\(.thumbnail.x2 // "https://via.placeholder.com/640x480")\" alt=\"Thumbnail\" width=\"640\" height=\"480\"/>]]></summary></entry>"' data.json >> docs/feed.atom
