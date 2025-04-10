@@ -2,7 +2,7 @@ name: Generate Atom/RSS Feed from Otomoto JSON
 
 on:
   schedule:
-    - cron: '0 * * * *' # Runs every hour; adjust as needed
+    - cron: '20 * * * *' # Runs every hour at the 20th minute
   workflow_dispatch: # Allows manual triggering
   
 permissions:
