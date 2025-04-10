@@ -18,6 +18,8 @@ jobs:
 
       - name: Convert JSON to Atom Feed
         run: |
+          # Create docs directory if it doesn't exist
+          mkdir -p docs
           # Start the Atom feed
           cat <<EOF > docs/feed.atom
           <?xml version="1.0" encoding="utf-8"?>
